@@ -17,7 +17,7 @@ RESPONSIVENESS_ALPHA = {"Slow": 0.15, "Normal": 0.3, "Fast": 0.5}
 
 DEFAULT_CURVE = "0:8 10:25 100:45 1000:75 10000:100"
 
-# (group, key) -> (attribute, type, default)
+# (group, key): (attribute, type, default)
 ENTRIES = {
     ("AutoBrightness", "Enabled"): ("auto_enabled", bool, True),
     ("AutoBrightness", "MinPercent"): ("min_percent", int, 5),
