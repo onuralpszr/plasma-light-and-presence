@@ -36,6 +36,12 @@ The project has three parts:
 | Presence: dim, lock and wake                           | ⚠️     | ready, turns on only with a usable sensor            |
 | Presence on camera based sensors (Dell XPS 16 DA16260) | ⛔     | the sensor reports nothing unless the camera streams |
 
+## Screenshots
+
+| System Settings page                                                                              | Plasma widget                                                                       |
+| ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| <img src="docs/screenshots/settings-page.png" alt="Light and Presence settings page" width="420"> | <img src="docs/screenshots/widget.png" alt="Light and Presence widget" width="420"> |
+
 ## Requirements
 
 - KDE Plasma 6 (the service uses PowerDevil's `org.kde.ScreenBrightness` interface to change the brightness).
