@@ -12,6 +12,18 @@ The project has three parts:
 - **Light & Presence**, a Plasma widget for the panel or the system tray, with
   the current readings, on and off switches and a brightness preference slider.
 
+## Status
+
+✅ working, ⚠️ partly working, ❌ not working, ⛔ blocked by hardware support
+
+| Feature | Status | Notes |
+|---|---|---|
+| Automatic brightness from the light sensor | ✅ | spike filter, smoothing and a learned preference |
+| System Settings page | ✅ | Light & Presence, under Display and Monitor |
+| Plasma widget | ✅ | panel or system tray |
+| Presence: dim, lock and wake | ⚠️ | ready, turns on only with a usable sensor |
+| Presence on camera based sensors (Dell XPS 16 DA16260) | ⛔ | the sensor reports nothing unless the camera streams |
+
 ## Requirements
 
 - KDE Plasma 6 (the service uses PowerDevil's `org.kde.ScreenBrightness`
