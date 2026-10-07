@@ -16,37 +16,31 @@
   <a href="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/xps-fedora/package/plasma-sensord/"><img alt="COPR build" src="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/xps-fedora/package/plasma-sensord/status_image/last_build.png"></a>
 </p>
 
-plasma-sensord adjusts the screen brightness of a KDE Plasma 6 session from the
-ambient light sensor. When the computer has a usable human presence sensor, it
-can also dim the screen when you leave, lock the session when you stay away,
-and wake the screen to the lock screen when you return.
+plasma-sensord adjusts the screen brightness of a KDE Plasma 6 session from the ambient light sensor. When the computer has a usable human presence sensor, it can also dim the screen when you leave, lock the session when you stay away, and wake the screen to the lock screen when you return.
 
 The project has three parts:
 
 - **plasma-sensord**, a small service that runs in your user session.
 - **Light & Presence**, a page in System Settings (under Display and Monitor).
-- **Light & Presence**, a Plasma widget for the panel or the system tray, with
-  the current readings, on and off switches and a brightness preference slider.
+- **Light & Presence**, a Plasma widget for the panel or the system tray, with the current readings, on and off switches and a brightness preference slider.
 
 ## Status
 
 ✅ working, ⚠️ partly working, ❌ not working, ⛔ blocked by hardware support
 
-| Feature | Status | Notes |
-|---|---|---|
-| Automatic brightness from the light sensor | ✅ | spike filter, smoothing and a learned preference |
-| System Settings page | ✅ | Light & Presence, under Display and Monitor |
-| Plasma widget | ✅ | panel or system tray |
-| Presence: dim, lock and wake | ⚠️ | ready, turns on only with a usable sensor |
-| Presence on camera based sensors (Dell XPS 16 DA16260) | ⛔ | the sensor reports nothing unless the camera streams |
+| Feature                                                | Status | Notes                                                |
+| ------------------------------------------------------ | ------ | ---------------------------------------------------- |
+| Automatic brightness from the light sensor             | ✅     | spike filter, smoothing and a learned preference     |
+| System Settings page                                   | ✅     | Light & Presence, under Display and Monitor          |
+| Plasma widget                                          | ✅     | panel or system tray                                 |
+| Presence: dim, lock and wake                           | ⚠️     | ready, turns on only with a usable sensor            |
+| Presence on camera based sensors (Dell XPS 16 DA16260) | ⛔     | the sensor reports nothing unless the camera streams |
 
 ## Requirements
 
-- KDE Plasma 6 (the service uses PowerDevil's `org.kde.ScreenBrightness`
-  interface to change the brightness).
+- KDE Plasma 6 (the service uses PowerDevil's `org.kde.ScreenBrightness` interface to change the brightness).
 - iio-sensor-proxy, which gives access to the ambient light sensor.
-- Python 3 with the `dbus` and `gi` modules (`python3-dbus` and
-  `python3-gobject` on Fedora).
+- Python 3 with the `dbus` and `gi` modules (`python3-dbus` and `python3-gobject` on Fedora).
 
 ## Building
 
@@ -66,79 +60,53 @@ An RPM spec file is provided in `packaging/plasma-sensord.spec`.
 
 ## Starting the service
 
-The package does not enable the service for every user. To start it now and
-at every login, run:
+The package does not enable the service for every user. To start it now and at every login, run:
 
     systemctl --user enable --now plasma-sensord
 
-The widget and the settings page also offer a button to start it for the
-current session. To see what the service does, read its log:
+The widget and the settings page also offer a button to start it for the current session. To see what the service does, read its log:
 
     journalctl --user -u plasma-sensord -f
 
-For troubleshooting, the service can run in the foreground with `--debug`,
-and with `--dry-run` it reads the sensors without changing the brightness.
+For troubleshooting, the service can run in the foreground with `--debug`, and with `--dry-run` it reads the sensors without changing the brightness.
 
 ## How automatic brightness works
 
-- The light sensor is read every half second. iio-sensor-proxy only signals
-  when the value changes, so the service polls it instead of waiting.
-- Some sensors report short bursts of impossible values. Readings above 40000
-  lux are dropped, and the light level is the 30th percentile of the last six
-  seconds, so a short burst cannot move it.
-- Every two seconds the level is smoothed (weight 0.3 at the Normal
-  responsiveness) and mapped to a brightness on a logarithmic curve:
+- The light sensor is read every half second. iio-sensor-proxy only signals when the value changes, so the service polls it instead of waiting.
+- Some sensors report short bursts of impossible values. Readings above 40000 lux are dropped, and the light level is the 30th percentile of the last six seconds, so a short burst cannot move it.
+- Every two seconds the level is smoothed (weight 0.3 at the Normal responsiveness) and mapped to a brightness on a logarithmic curve:
 
   | Light (lux) | Brightness |
-  |------------:|-----------:|
-  | 0           | 8%         |
-  | 10          | 25%        |
-  | 100         | 45%        |
-  | 1000        | 75%        |
-  | 10000       | 100%       |
+  | ----------: | ---------: |
+  |           0 |         8% |
+  |          10 |        25% |
+  |         100 |        45% |
+  |        1000 |        75% |
+  |       10000 |       100% |
 
-- The brightness changes only when the target differs by more than a few
-  percent, and then with a short fade.
-- When you change the brightness yourself and leave it for ten seconds, the
-  difference is kept as your preference and applied on top of the curve from
-  then on. The widget's slider sets the same preference.
-- When the brightness drops to half or less at once (Plasma dimming an idle
-  screen), adjustment pauses until the brightness comes back. Nothing is
-  learned from it.
+- The brightness changes only when the target differs by more than a few percent, and then with a short fade.
+- When you change the brightness yourself and leave it for ten seconds, the difference is kept as your preference and applied on top of the curve from then on. The widget's slider sets the same preference.
+- When the brightness drops to half or less at once (Plasma dimming an idle screen), adjustment pauses until the brightness comes back. Nothing is learned from it.
 
-The learned preference is kept in `~/.local/state/plasma-sensord/state`. A
-preference learned by the earlier xps-ptl-autobrightness prototype is imported
-on first start.
+The learned preference is kept in `~/.local/state/plasma-sensord/state`. A preference learned by the earlier xps-ptl-autobrightness prototype is imported on first start.
 
 ## Presence
 
-Presence is optional and only becomes active when a sensor proves usable. The
-service looks for the kernel's HID human presence sensor (an IIO device named
-`prox`) and for a proximity sensor exposed by iio-sensor-proxy. A sensor is
-only trusted after it has reported changing values. Some presence sensors are
-camera based and report "not available" unless the camera is streaming; on
-such systems the presence options stay greyed out and the settings page shows
-"No supported presence sensor was found on this system."
+Presence is optional and only becomes active when a sensor proves usable. The service looks for the kernel's HID human presence sensor (an IIO device named `prox`) and for a proximity sensor exposed by iio-sensor-proxy. A sensor is only trusted after it has reported changing values. Some presence sensors are camera based and report "not available" unless the camera is streaming; on such systems the presence options stay greyed out and the settings page shows "No supported presence sensor was found on this system."
 
 When a sensor is usable, the following actions can be enabled:
 
 - dim the screen when you have been away for a while;
 - lock the session (`loginctl lock-session`) when you stay away longer;
-- wake the screen when you return. The lock screen stays in place; the
-  service never unlocks the session;
-- dim the screen when you look away from it, on sensors that report
-  attention;
-- skip dimming and locking while an application blocks power management,
-  for example during a video or a presentation.
+- wake the screen when you return. The lock screen stays in place; the service never unlocks the session;
+- dim the screen when you look away from it, on sensors that report attention;
+- skip dimming and locking while an application blocks power management, for example during a video or a presentation.
 
-The `tools/` directory contains diagnostic scripts for HID presence sensors.
-They must run as root.
+The `tools/` directory contains diagnostic scripts for HID presence sensors. They must run as root.
 
 ## Settings
 
-Settings are stored in `~/.config/plasma-sensordrc`. System-wide defaults can
-be placed in `/etc/xdg/plasma-sensordrc`. The service notices changes to the
-file and applies them at once. Example:
+Settings are stored in `~/.config/plasma-sensordrc`. System-wide defaults can be placed in `/etc/xdg/plasma-sensordrc`. The service notices changes to the file and applies them at once. Example:
 
     [AutoBrightness]
     Enabled=true
@@ -164,19 +132,11 @@ The full list of keys is in `kcm/plasmasensordsettings.kcfg`.
 
 ## D-Bus interface
 
-The service owns `org.plasmasensord.Daemon` on the session bus, with the
-object `/org/plasmasensord/Daemon`.
+The service owns `org.plasmasensord.Daemon` on the session bus, with the object `/org/plasmasensord/Daemon`.
 
-Properties (announced with `PropertiesChanged`): `Lux`, `Brightness`,
-`Target`, `Offset` (percent), `Paused`, `AutoBrightnessEnabled`, `ShowOsd`,
-`LightSensorAvailable`, `DisplayAvailable`, `PresenceEnabled`,
-`PresenceAvailable`, `Present`, `Attentive`, `Distance` (metres, -1 when
-unknown), `PresenceState` and `Version`.
+Properties (announced with `PropertiesChanged`): `Lux`, `Brightness`, `Target`, `Offset` (percent), `Paused`, `AutoBrightnessEnabled`, `ShowOsd`, `LightSensorAvailable`, `DisplayAvailable`, `PresenceEnabled`, `PresenceAvailable`, `Present`, `Attentive`, `Distance` (metres, -1 when unknown), `PresenceState` and `Version`.
 
-Methods: `SetAutoBrightnessEnabled(b)`, `SetPresenceEnabled(b)`,
-`SetOffset(d)`, `ResetOffset()`, `Reload()`, and the argument-free
-`EnableAutoBrightness()`, `DisableAutoBrightness()`, `EnablePresence()` and
-`DisablePresence()`.
+Methods: `SetAutoBrightnessEnabled(b)`, `SetPresenceEnabled(b)`, `SetOffset(d)`, `ResetOffset()`, `Reload()`, and the argument-free `EnableAutoBrightness()`, `DisableAutoBrightness()`, `EnablePresence()` and `DisablePresence()`.
 
 For example:
 
@@ -187,14 +147,13 @@ For example:
 
 plasma-sensord is built on these projects. Thank you to everyone behind them.
 
-* [KDE Frameworks](https://develop.kde.org/products/frameworks/): [KConfig](https://invent.kde.org/frameworks/kconfig), [KCMUtils](https://invent.kde.org/frameworks/kcmutils), [Kirigami](https://invent.kde.org/frameworks/kirigami) and [KI18n](https://invent.kde.org/frameworks/ki18n).
-* [KDE Plasma](https://kde.org/plasma-desktop/): [libplasma](https://invent.kde.org/plasma/libplasma) for the widget and [PowerDevil](https://invent.kde.org/plasma/powerdevil) for the screen brightness interface.
-* [iio-sensor-proxy](https://gitlab.freedesktop.org/hadess/iio-sensor-proxy), for the ambient light and proximity sensors.
-* The Linux [HID sensor hub and IIO](https://docs.kernel.org/hid/hid-sensor.html) drivers, which expose the human presence sensor.
-* [dbus-python](https://gitlab.freedesktop.org/dbus/dbus-python) and [systemd-logind](https://www.freedesktop.org/software/systemd/man/latest/systemd-logind.service.html), for the session bus and screen locking.
-* [xps-fedora](https://github.com/onuralpszr/xps-fedora), where this started as the XPS auto brightness service.
+- [KDE Frameworks](https://develop.kde.org/products/frameworks/): [KConfig](https://invent.kde.org/frameworks/kconfig), [KCMUtils](https://invent.kde.org/frameworks/kcmutils), [Kirigami](https://invent.kde.org/frameworks/kirigami) and [KI18n](https://invent.kde.org/frameworks/ki18n).
+- [KDE Plasma](https://kde.org/plasma-desktop/): [libplasma](https://invent.kde.org/plasma/libplasma) for the widget and [PowerDevil](https://invent.kde.org/plasma/powerdevil) for the screen brightness interface.
+- [iio-sensor-proxy](https://gitlab.freedesktop.org/hadess/iio-sensor-proxy), for the ambient light and proximity sensors.
+- The Linux [HID sensor hub and IIO](https://docs.kernel.org/hid/hid-sensor.html) drivers, which expose the human presence sensor.
+- [dbus-python](https://gitlab.freedesktop.org/dbus/dbus-python) and [systemd-logind](https://www.freedesktop.org/software/systemd/man/latest/systemd-logind.service.html), for the session bus and screen locking.
+- [xps-fedora](https://github.com/onuralpszr/xps-fedora), where this started as the XPS auto brightness service.
 
 ## License
 
-plasma-sensord is distributed under the Apache License, Version 2.0. See the
-`LICENSE` file.
+plasma-sensord is distributed under the Apache License, Version 2.0. See the `LICENSE` file.
