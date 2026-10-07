@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.22)
 
-project(plasma-sensord VERSION 0.1.0 LANGUAGES CXX)
+project(plasma-light-and-presence VERSION 0.1.0 LANGUAGES CXX)
 
 set(QT_MIN_VERSION "6.6.0")
 set(KF6_MIN_VERSION "6.0.0")
