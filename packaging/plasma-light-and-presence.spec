@@ -1,10 +1,10 @@
-Name:           plasma-sensord
+Name:           plasma-light-and-presence
 Version:        0.1.0
 Release:        1%{?dist}
 Summary:        Ambient light brightness and presence sensing for KDE Plasma
 
 License:        Apache-2.0
-URL:            https://github.com/onuralpszr/plasma-sensord
+URL:            https://github.com/onuralpszr/plasma-light-and-presence
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  cmake
@@ -39,12 +39,14 @@ Requires:       hicolor-icon-theme
 
 # The xps-ptl-tools prototype shipped the same feature under another name.
 Obsoletes:      xps-ptl-tools < 1.0
+# Published briefly under its first name
+Obsoletes:      plasma-sensord < 0.1.1
 
 %description
-plasma-sensord adjusts the screen brightness of a KDE Plasma session from the
-ambient light sensor, and can react to human presence when the hardware has a
-usable presence sensor: dim the screen when you leave, lock it when you stay
-away, and wake it to the lock screen when you return.
+plasma-light-and-presence adjusts the screen brightness of a KDE Plasma session
+from the ambient light sensor, and can react to human presence when the
+hardware has a usable presence sensor: dim the screen when you leave, lock it
+when you stay away, and wake it to the lock screen when you return.
 
 It consists of a user service, a "Light & Presence" page in System Settings
 and a Plasma widget. The service is not enabled automatically; README.md
@@ -59,33 +61,33 @@ explains how each user can enable it.
 
 %install
 %cmake_install
-%py_byte_compile %{python3} %{buildroot}%{_datadir}/plasma-sensord
+%py_byte_compile %{python3} %{buildroot}%{_datadir}/plasma-light-and-presence
 
 %check
-desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_plasmasensord.desktop
+desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_lightandpresence.desktop
 
 %post
-%systemd_user_post plasma-sensord.service
+%systemd_user_post plasma-light-and-presence.service
 
 %preun
-%systemd_user_preun plasma-sensord.service
+%systemd_user_preun plasma-light-and-presence.service
 
 %postun
-%systemd_user_postun_with_restart plasma-sensord.service
+%systemd_user_postun_with_restart plasma-light-and-presence.service
 
 %files
 %license LICENSE
 %doc README.md
-%{_bindir}/plasma-sensord
-%{_datadir}/plasma-sensord/
-%{_userunitdir}/plasma-sensord.service
-%{_kf6_qtplugindir}/plasma/kcms/systemsettings/kcm_plasmasensord.so
-%{_kf6_datadir}/applications/kcm_plasmasensord.desktop
-%{_kf6_datadir}/config.kcfg/plasmasensordsettings.kcfg
-%{_kf6_datadir}/plasma/plasmoids/org.plasmasensord.widget/
-%{_datadir}/icons/hicolor/scalable/apps/plasma-sensord.svg
-%{_datadir}/icons/hicolor/scalable/apps/plasma-sensord-symbolic.svg
-%{_datadir}/icons/hicolor/scalable/apps/plasma-sensord-off-symbolic.svg
+%{_bindir}/plasma-light-and-presence
+%{_datadir}/plasma-light-and-presence/
+%{_userunitdir}/plasma-light-and-presence.service
+%{_kf6_qtplugindir}/plasma/kcms/systemsettings/kcm_lightandpresence.so
+%{_kf6_datadir}/applications/kcm_lightandpresence.desktop
+%{_kf6_datadir}/config.kcfg/lightandpresencesettings.kcfg
+%{_kf6_datadir}/plasma/plasmoids/io.github.onuralpszr.lightandpresence/
+%{_datadir}/icons/hicolor/scalable/apps/plasma-light-and-presence.svg
+%{_datadir}/icons/hicolor/scalable/apps/plasma-light-and-presence-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/apps/plasma-light-and-presence-off-symbolic.svg
 
 %changelog
 * Wed Oct 07 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org> - 0.1.0-1
