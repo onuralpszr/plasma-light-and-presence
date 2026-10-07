@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  plasma-sensord settings, stored in ~/.config/plasma-sensordrc
+  (defaults can be overridden system-wide in /etc/xdg/plasma-sensordrc).
+  Shared by the System Settings page (KConfigXT) and the daemon, which
+  reloads the file whenever it changes.
+-->
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name="plasma-sensordrc"/>
+
+  <group name="AutoBrightness">
+    <entry name="AutoBrightnessEnabled" key="Enabled" type="Bool">
+      <label>Adjust screen brightness to the ambient light</label>
+      <default>true</default>
+    </entry>
+    <entry name="MinPercent" type="Int">
+      <label>Lowest brightness</label>
+      <default>5</default>
+      <min>1</min>
+      <max>100</max>
+    </entry>
+    <entry name="MaxPercent" type="Int">
+      <label>Highest brightness</label>
+      <default>100</default>
+      <min>1</min>
+      <max>100</max>
+    </entry>
+    <entry name="Responsiveness" type="Enum">
+      <label>How quickly brightness follows the light</label>
+      <choices>
+        <choice name="Slow"/>
+        <choice name="Normal"/>
+        <choice name="Fast"/>
+      </choices>
+      <default>Normal</default>
+    </entry>
+    <entry name="Curve" type="String">
+      <label>Brightness curve as "lux:percent" points, interpolated on a logarithmic light scale</label>
+      <default>0:8 10:25 100:45 1000:75 10000:100</default>
+    </entry>
+    <entry name="ShowOsd" type="Bool">
+      <label>Show the brightness OSD on automatic changes</label>
+      <default>false</default>
+    </entry>
+  </group>
+
+  <group name="Presence">
+    <entry name="PresenceEnabled" key="Enabled" type="Bool">
+      <label>Use the presence sensor</label>
+      <default>true</default>
+    </entry>
+    <entry name="DimWhenAway" type="Bool">
+      <label>Dim the screen when you leave</label>
+      <default>true</default>
+    </entry>
+    <entry name="DimAwaySeconds" type="Int">
+      <label>Dim after being away for (seconds)</label>
+      <default>30</default>
+      <min>5</min>
+      <max>600</max>
+    </entry>
+    <entry name="LockWhenAway" type="Bool">
+      <label>Lock the screen when you leave</label>
+      <default>true</default>
+    </entry>
+    <entry name="LockAwaySeconds" type="Int">
+      <label>Lock after being away for (seconds)</label>
+      <default>60</default>
+      <min>10</min>
+      <max>1800</max>
+    </entry>
+    <entry name="WakeOnReturn" type="Bool">
+      <label>Wake the screen when you come back</label>
+      <default>true</default>
+    </entry>
+    <entry name="DimWhenLookingAway" type="Bool">
+      <label>Dim the screen when you look away</label>
+      <default>false</default>
+    </entry>
+    <entry name="LookAwaySeconds" type="Int">
+      <label>Dim after looking away for (seconds)</label>
+      <default>20</default>
+      <min>5</min>
+      <max>300</max>
+    </entry>
+    <entry name="DimLevelPercent" type="Int">
+      <label>Dimmed brightness, as a percentage of the current brightness</label>
+      <default>30</default>
+      <min>0</min>
+      <max>90</max>
+    </entry>
+    <entry name="RespectInhibitors" type="Bool">
+      <label>Don't dim or lock while an application inhibits it (videos, presentations)</label>
+      <default>true</default>
+    </entry>
+  </group>
+
+  <group name="Sensors">
+    <entry name="MaxLux" type="Int">
+      <label>Readings above this are treated as sensor glitches (lux)</label>
+      <default>40000</default>
+      <min>1000</min>
+      <max>200000</max>
+    </entry>
+    <entry name="SpikeWindowSeconds" type="Int">
+      <label>Spike filter window (seconds)</label>
+      <default>6</default>
+      <min>1</min>
+      <max>30</max>
+    </entry>
+  </group>
+</kcfg>

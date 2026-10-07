@@ -1,0 +1,6 @@
+File=plasmasensordsettings.kcfg
+ClassName=PlasmaSensordSettings
+Mutators=true
+DefaultValueGetters=true
+GenerateProperties=true
+ParentInConstructor=true
