@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="data/icons/plasma-sensord.svg" alt="plasma-sensord icon" width="128">
+  <img src="data/icons/plasma-light-and-presence.svg" alt="plasma-light-and-presence icon" width="128">
 </p>
 
-<h1 align="center">plasma-sensord</h1>
+<h1 align="center">plasma-light-and-presence</h1>
 
 <p align="center">
   Ambient light brightness and presence awareness for KDE Plasma 6.
@@ -12,15 +12,15 @@
   <a href="LICENSE"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg"></a>
   <a href="https://kde.org/plasma-desktop/"><img alt="KDE Plasma 6" src="https://img.shields.io/badge/KDE%20Plasma-6-1D99F3?logo=kde&amp;logoColor=white"></a>
   <a href="https://fedoraproject.org"><img alt="Fedora 45" src="https://img.shields.io/badge/Fedora-45-51A2DA?logo=fedora&amp;logoColor=white"></a>
-  <a href="https://github.com/onuralpszr/plasma-sensord/actions/workflows/check.yml"><img alt="Check" src="https://github.com/onuralpszr/plasma-sensord/actions/workflows/check.yml/badge.svg"></a>
-  <a href="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/plasma-sensord/package/plasma-sensord/"><img alt="COPR build" src="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/plasma-sensord/package/plasma-sensord/status_image/last_build.png"></a>
+  <a href="https://github.com/onuralpszr/plasma-light-and-presence/actions/workflows/check.yml"><img alt="Check" src="https://github.com/onuralpszr/plasma-light-and-presence/actions/workflows/check.yml/badge.svg"></a>
+  <a href="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/plasma-light-and-presence/package/plasma-light-and-presence/"><img alt="COPR build" src="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/plasma-light-and-presence/package/plasma-light-and-presence/status_image/last_build.png"></a>
 </p>
 
-plasma-sensord adjusts the screen brightness of a KDE Plasma 6 session from the ambient light sensor. When the computer has a usable human presence sensor, it can also dim the screen when you leave, lock the session when you stay away, and wake the screen to the lock screen when you return.
+plasma-light-and-presence adjusts the screen brightness of a KDE Plasma 6 session from the ambient light sensor. When the computer has a usable human presence sensor, it can also dim the screen when you leave, lock the session when you stay away, and wake the screen to the lock screen when you return.
 
 The project has three parts:
 
-- **plasma-sensord**, a small service that runs in your user session.
+- **plasma-light-and-presence**, a small service that runs in your user session.
 - **Light & Presence**, a page in System Settings (under Display and Monitor).
 - **Light & Presence**, a Plasma widget for the panel or the system tray, with the current readings, on and off switches and a brightness preference slider.
 
@@ -44,12 +44,12 @@ The project has three parts:
 
 ## Installing
 
-On Fedora, plasma-sensord is available from COPR:
+On Fedora, plasma-light-and-presence is available from COPR:
 
 ```bash
-sudo dnf copr enable thunderbirdtr/plasma-sensord
-sudo dnf install plasma-sensord
-systemctl --user enable --now plasma-sensord
+sudo dnf copr enable thunderbirdtr/plasma-light-and-presence
+sudo dnf install plasma-light-and-presence
+systemctl --user enable --now plasma-light-and-presence
 ```
 
 Then open System Settings, Display and Monitor, Light & Presence, or add the Light & Presence widget to a panel.
@@ -74,17 +74,17 @@ Then:
     cmake --build build
     sudo cmake --install build
 
-An RPM spec file is provided in `packaging/plasma-sensord.spec`.
+An RPM spec file is provided in `packaging/plasma-light-and-presence.spec`.
 
 ## Starting the service
 
 The package does not enable the service for every user. To start it now and at every login, run:
 
-    systemctl --user enable --now plasma-sensord
+    systemctl --user enable --now plasma-light-and-presence
 
 The widget and the settings page also offer a button to start it for the current session. To see what the service does, read its log:
 
-    journalctl --user -u plasma-sensord -f
+    journalctl --user -u plasma-light-and-presence -f
 
 For troubleshooting, the service can run in the foreground with `--debug`, and with `--dry-run` it reads the sensors without changing the brightness.
 
@@ -106,7 +106,7 @@ For troubleshooting, the service can run in the foreground with `--debug`, and w
 - When you change the brightness yourself and leave it for ten seconds, the difference is kept as your preference and applied on top of the curve from then on. The widget's slider sets the same preference.
 - When the brightness drops to half or less at once (Plasma dimming an idle screen), adjustment pauses until the brightness comes back. Nothing is learned from it.
 
-The learned preference is kept in `~/.local/state/plasma-sensord/state`. A preference saved by the earlier auto brightness prototype is imported on first start.
+The learned preference is kept in `~/.local/state/plasma-light-and-presence/state`. A preference saved by the earlier auto brightness prototype is imported on first start.
 
 ## Presence
 
@@ -124,7 +124,7 @@ The `tools/` directory contains diagnostic scripts for HID presence sensors. The
 
 ## Settings
 
-Settings are stored in `~/.config/plasma-sensordrc`. System-wide defaults can be placed in `/etc/xdg/plasma-sensordrc`. The service notices changes to the file and applies them at once. Example:
+Settings are stored in `~/.config/plasma-light-and-presencerc`. System-wide defaults can be placed in `/etc/xdg/plasma-light-and-presencerc`. The service notices changes to the file and applies them at once. Example:
 
     [AutoBrightness]
     Enabled=true
@@ -146,11 +146,11 @@ Settings are stored in `~/.config/plasma-sensordrc`. System-wide defaults can be
     MaxLux=40000
     SpikeWindowSeconds=6
 
-The full list of keys is in `kcm/plasmasensordsettings.kcfg`.
+The full list of keys is in `kcm/lightandpresencesettings.kcfg`.
 
 ## D-Bus interface
 
-The service owns `org.plasmasensord.Daemon` on the session bus, with the object `/org/plasmasensord/Daemon`.
+The service owns `io.github.onuralpszr.LightAndPresence` on the session bus, with the object `/io/github/onuralpszr/LightAndPresence`.
 
 Properties (announced with `PropertiesChanged`): `Lux`, `Brightness`, `Target`, `Offset` (percent), `Paused`, `AutoBrightnessEnabled`, `ShowOsd`, `LightSensorAvailable`, `DisplayAvailable`, `PresenceEnabled`, `PresenceAvailable`, `Present`, `Attentive`, `Distance` (metres, -1 when unknown), `PresenceState` and `Version`.
 
@@ -158,12 +158,12 @@ Methods: `SetAutoBrightnessEnabled(b)`, `SetPresenceEnabled(b)`, `SetOffset(d)`,
 
 For example:
 
-    busctl --user get-property org.plasmasensord.Daemon /org/plasmasensord/Daemon \
-        org.plasmasensord.Daemon Lux
+    busctl --user get-property io.github.onuralpszr.LightAndPresence /io/github/onuralpszr/LightAndPresence \
+        io.github.onuralpszr.LightAndPresence Lux
 
 ## Credits
 
-plasma-sensord is built on these projects. Thank you to everyone behind them.
+plasma-light-and-presence is built on these projects. Thank you to everyone behind them.
 
 - [KDE Frameworks](https://develop.kde.org/products/frameworks/): [KConfig](https://invent.kde.org/frameworks/kconfig), [KCMUtils](https://invent.kde.org/frameworks/kcmutils), [Kirigami](https://invent.kde.org/frameworks/kirigami) and [KI18n](https://invent.kde.org/frameworks/ki18n).
 - [KDE Plasma](https://kde.org/plasma-desktop/): [libplasma](https://invent.kde.org/plasma/libplasma) for the widget and [PowerDevil](https://invent.kde.org/plasma/powerdevil) for the screen brightness interface.
@@ -174,4 +174,4 @@ plasma-sensord is built on these projects. Thank you to everyone behind them.
 
 ## License
 
-plasma-sensord is distributed under the Apache License, Version 2.0. See the `LICENSE` file.
+plasma-light-and-presence is distributed under the Apache License, Version 2.0. See the `LICENSE` file.
