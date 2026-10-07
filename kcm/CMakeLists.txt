@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org>
 
-kcmutils_add_qml_kcm(kcm_plasmasensord SOURCES kcm.cpp daemonclient.cpp)
+kcmutils_add_qml_kcm(kcm_lightandpresence SOURCES kcm.cpp daemonclient.cpp)
 
-kconfig_add_kcfg_files(kcm_plasmasensord plasmasensordsettings.kcfgc GENERATE_MOC)
+kconfig_add_kcfg_files(kcm_lightandpresence lightandpresencesettings.kcfgc GENERATE_MOC)
 
-target_compile_definitions(kcm_plasmasensord PRIVATE TRANSLATION_DOMAIN="kcm_plasmasensord")
+target_compile_definitions(kcm_lightandpresence PRIVATE TRANSLATION_DOMAIN="kcm_lightandpresence")
 
-target_link_libraries(kcm_plasmasensord PRIVATE
+target_link_libraries(kcm_lightandpresence PRIVATE
     Qt::Core
     Qt::DBus
     Qt::Qml
@@ -18,4 +18,4 @@ target_link_libraries(kcm_plasmasensord PRIVATE
     KF6::KCMUtilsQuick
 )
 
-install(FILES plasmasensordsettings.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
+install(FILES lightandpresencesettings.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})

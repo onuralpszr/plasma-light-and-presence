@@ -7,7 +7,7 @@
             }
         ],
         "Description": "Screen brightness from the ambient light sensor and presence sensing",
-        "Icon": "plasma-sensord",
+        "Icon": "plasma-light-and-presence",
         "License": "Apache-2.0",
         "Name": "Light & Presence"
     },

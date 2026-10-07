@@ -71,7 +71,7 @@ KCM.SimpleKCM {
             visible: !root.running
             type: Kirigami.MessageType.Warning
             position: Kirigami.InlineMessage.Position.Header
-            text: i18n("The Light & Presence service is not running. Settings are saved, but nothing is applied until it runs. To start it at every login, run: systemctl --user enable --now plasma-sensord")
+            text: i18n("The Light & Presence service is not running. Settings are saved, but nothing is applied until it runs. To start it at every login, run: systemctl --user enable --now plasma-light-and-presence")
             actions: Kirigami.Action {
                 icon.name: "media-playback-start"
                 text: i18n("Start Service")

@@ -7,29 +7,29 @@
 
 #include <QQmlEngine>
 
-K_PLUGIN_CLASS_WITH_JSON(PlasmaSensordKcm, "kcm_plasmasensord.json")
+K_PLUGIN_CLASS_WITH_JSON(LightAndPresenceKcm, "kcm_lightandpresence.json")
 
-PlasmaSensordKcm::PlasmaSensordKcm(QObject *parent, const KPluginMetaData &metaData)
+LightAndPresenceKcm::LightAndPresenceKcm(QObject *parent, const KPluginMetaData &metaData)
     : KQuickManagedConfigModule(parent, metaData)
-    , m_settings(new PlasmaSensordSettings(this))
+    , m_settings(new LightAndPresenceSettings(this))
     , m_daemon(new DaemonClient(this))
 {
-    qmlRegisterAnonymousType<PlasmaSensordSettings>("org.plasmasensord.kcm", 1);
-    qmlRegisterAnonymousType<DaemonClient>("org.plasmasensord.kcm", 1);
+    qmlRegisterAnonymousType<LightAndPresenceSettings>("io.github.onuralpszr.lightandpresence.kcm", 1);
+    qmlRegisterAnonymousType<DaemonClient>("io.github.onuralpszr.lightandpresence.kcm", 1);
     setButtons(Apply | Default);
 }
 
-PlasmaSensordSettings *PlasmaSensordKcm::settings() const
+LightAndPresenceSettings *LightAndPresenceKcm::settings() const
 {
     return m_settings;
 }
 
-DaemonClient *PlasmaSensordKcm::daemon() const
+DaemonClient *LightAndPresenceKcm::daemon() const
 {
     return m_daemon;
 }
 
-void PlasmaSensordKcm::save()
+void LightAndPresenceKcm::save()
 {
     KQuickManagedConfigModule::save();
     // The daemon also watches the file; this makes the change immediate.

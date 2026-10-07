@@ -12,9 +12,9 @@
 
 using namespace Qt::StringLiterals;
 
-static const QString s_service = u"org.plasmasensord.Daemon"_s;
-static const QString s_path = u"/org/plasmasensord/Daemon"_s;
-static const QString s_interface = u"org.plasmasensord.Daemon"_s;
+static const QString s_service = u"io.github.onuralpszr.LightAndPresence"_s;
+static const QString s_path = u"/io/github/onuralpszr/LightAndPresence"_s;
+static const QString s_interface = u"io.github.onuralpszr.LightAndPresence"_s;
 static const QString s_propertiesInterface = u"org.freedesktop.DBus.Properties"_s;
 
 DaemonClient::DaemonClient(QObject *parent)
@@ -114,6 +114,6 @@ void DaemonClient::startService()
                                                       u"/org/freedesktop/systemd1"_s,
                                                       u"org.freedesktop.systemd1.Manager"_s,
                                                       u"StartUnit"_s);
-    msg << u"plasma-sensord.service"_s << u"replace"_s;
+    msg << u"plasma-light-and-presence.service"_s << u"replace"_s;
     QDBusConnection::sessionBus().asyncCall(msg);
 }

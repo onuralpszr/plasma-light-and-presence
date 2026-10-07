@@ -1,5 +1,5 @@
-File=plasmasensordsettings.kcfg
-ClassName=PlasmaSensordSettings
+File=lightandpresencesettings.kcfg
+ClassName=LightAndPresenceSettings
 Mutators=true
 DefaultValueGetters=true
 GenerateProperties=true

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  plasma-sensord settings, stored in ~/.config/plasma-sensordrc
-  (defaults can be overridden system-wide in /etc/xdg/plasma-sensordrc).
+  plasma-light-and-presence settings, stored in ~/.config/plasma-light-and-presencerc
+  (defaults can be overridden system-wide in /etc/xdg/plasma-light-and-presencerc).
   Shared by the System Settings page (KConfigXT) and the daemon, which
   reloads the file whenever it changes.
 -->
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
-  <kcfgfile name="plasma-sensordrc"/>
+  <kcfgfile name="plasma-light-and-presencerc"/>
 
   <group name="AutoBrightness">
     <entry name="AutoBrightnessEnabled" key="Enabled" type="Bool">

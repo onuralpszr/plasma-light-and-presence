@@ -9,7 +9,7 @@
 class QDBusServiceWatcher;
 
 /**
- * Live view of the plasma-sensord daemon on the session bus.
+ * Live view of the plasma-light-and-presence daemon on the session bus.
  *
  * All daemon properties are mirrored in `values` (keys as on D-Bus, such as
  * "Lux" or "PresenceAvailable") and kept current from PropertiesChanged.
