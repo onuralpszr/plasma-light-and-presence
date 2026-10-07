@@ -1,0 +1,30 @@
+name: Problem report
+description: Brightness, presence, the settings page or the widget does not behave as expected.
+labels: [bug]
+body:
+  - type: input
+    id: device
+    attributes:
+      label: Computer model
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Output of `rpm -q plasma-sensord plasma-workspace iio-sensor-proxy`.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens
+      description: What you did, what you expected and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Output of `journalctl --user -u plasma-sensord -b`, ideally with the service started as `plasma-sensord --debug`.
+      render: text
