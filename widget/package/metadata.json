@@ -8,8 +8,8 @@
         ],
         "Category": "System Information",
         "Description": "Automatic brightness from the ambient light sensor and presence sensing",
-        "Icon": "plasma-sensord",
-        "Id": "org.plasmasensord.widget",
+        "Icon": "plasma-light-and-presence",
+        "Id": "io.github.onuralpszr.lightandpresence",
         "License": "Apache-2.0",
         "Name": "Light & Presence",
         "Version": "0.1.0"

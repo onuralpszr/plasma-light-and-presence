@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org>
 
-// Light & Presence: front end for the plasma-sensord user service
-// (org.plasmasensord.Daemon on the session bus).
+// Light & Presence: front end for the plasma-light-and-presence user service
+// (io.github.onuralpszr.LightAndPresence on the session bus).
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
@@ -16,11 +16,11 @@ import org.kde.plasma.workspace.dbus as DBus
 PlasmoidItem {
     id: root
 
-    readonly property string service: "org.plasmasensord.Daemon"
-    readonly property string objectPath: "/org/plasmasensord/Daemon"
-    readonly property string iconOn: "plasma-sensord-symbolic"
-    readonly property string iconOff: "plasma-sensord-off-symbolic"
-    readonly property string iconColor: "plasma-sensord"
+    readonly property string service: "io.github.onuralpszr.LightAndPresence"
+    readonly property string objectPath: "/io/github/onuralpszr/LightAndPresence"
+    readonly property string iconOn: "plasma-light-and-presence-symbolic"
+    readonly property string iconOff: "plasma-light-and-presence-off-symbolic"
+    readonly property string iconColor: "plasma-light-and-presence"
 
     // --- service state ---------------------------------------------------
     // The watcher only reports registration events; a service that was
@@ -93,12 +93,12 @@ PlasmoidItem {
             path: "/org/freedesktop/systemd1",
             iface: "org.freedesktop.systemd1.Manager",
             member: "StartUnit",
-            arguments: ["plasma-sensord.service", "replace"],
+            arguments: ["plasma-light-and-presence.service", "replace"],
         }, () => startCheck.start(), () => startCheck.start())
     }
 
     function openSettings() {
-        KCMUtils.KCMLauncher.openSystemSettings("kcm_plasmasensord")
+        KCMUtils.KCMLauncher.openSystemSettings("kcm_lightandpresence")
     }
 
     // --- helpers -----------------------------------------------------------
@@ -294,7 +294,7 @@ PlasmoidItem {
                     onClicked: root.startService()
                 }
                 Note {
-                    text: i18n("To start it at every login, run: systemctl --user enable --now plasma-sensord")
+                    text: i18n("To start it at every login, run: systemctl --user enable --now plasma-light-and-presence")
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 }
             }

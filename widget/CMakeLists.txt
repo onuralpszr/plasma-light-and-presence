@@ -3,4 +3,4 @@
 
 # A pure QML applet: install the package directory as it is.
 install(DIRECTORY package/
-        DESTINATION ${KDE_INSTALL_DATADIR}/plasma/plasmoids/org.plasmasensord.widget)
+        DESTINATION ${KDE_INSTALL_DATADIR}/plasma/plasmoids/io.github.onuralpszr.lightandpresence)
