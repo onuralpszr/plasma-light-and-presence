@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="data/icons/plasma-light-and-presence.svg" alt="plasma-light-and-presence icon" width="128">
+  <img src="data/icons/io.github.onuralpszr.lightandpresence.svg" alt="plasma-light-and-presence icon" width="128">
 </p>
 
 <h1 align="center">plasma-light-and-presence</h1>
