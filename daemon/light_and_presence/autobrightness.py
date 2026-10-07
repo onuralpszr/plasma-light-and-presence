@@ -93,7 +93,7 @@ class AutoBrightness:
                 self.paused_for = None
             return
         if before and value <= before * config.DIM_RATIO:
-            log.debug(f"sharp drop {before} -> {value}: idle dimming, pausing")
+            log.debug(f"sharp drop from {before} to {value}: idle dimming, pausing")
             self.display.cancel_fade()
             self.paused_for = before
             self.pending = None
@@ -136,7 +136,7 @@ class AutoBrightness:
             cur = self.display.current_raw()
             target = self.target_raw()
             if abs(target - cur) / self.display.max_raw * 100 >= config.HYSTERESIS_PERCENT:
-                log.debug(f"lux {self.lux:.0f}: {cur} -> {target:.0f}")
+                log.debug(f"lux {self.lux:.0f}: brightness {cur} to {target:.0f}")
                 self.display.fade(cur, target, osd=self.settings.show_osd,
                                   fade_ms=config.FADE_MS)
         except dbus.DBusException as e:
