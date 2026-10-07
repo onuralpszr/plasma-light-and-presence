@@ -12,7 +12,7 @@ body:
     id: versions
     attributes:
       label: Versions
-      description: Output of `rpm -q plasma-sensord plasma-workspace iio-sensor-proxy`.
+      description: Output of `rpm -q plasma-light-and-presence plasma-workspace iio-sensor-proxy`.
     validations:
       required: true
   - type: textarea
@@ -26,5 +26,5 @@ body:
     id: logs
     attributes:
       label: Logs
-      description: Output of `journalctl --user -u plasma-sensord -b`, ideally with the service started as `plasma-sensord --debug`.
+      description: Output of `journalctl --user -u plasma-light-and-presence -b`, ideally with the service started as `plasma-light-and-presence --debug`.
       render: text
