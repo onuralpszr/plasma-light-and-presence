@@ -4,8 +4,8 @@
 %global clamp_mtime_to_source_date_epoch 0
 
 Name:           plasma-light-and-presence
-Version:        0.1.0
-Release:        2%{?dist}
+Version:        0.1.1
+Release:        1%{?dist}
 Summary:        Ambient light brightness and presence sensing for KDE Plasma
 
 License:        Apache-2.0
@@ -42,10 +42,6 @@ Requires:       kf6-kirigami
 Requires:       plasma-workspace
 Requires:       hicolor-icon-theme
 
-# The xps-ptl-tools prototype shipped the same feature under another name.
-Obsoletes:      xps-ptl-tools < 1.0
-# Published briefly under its first name
-Obsoletes:      plasma-sensord < 0.1.1
 
 %description
 plasma-light-and-presence adjusts the screen brightness of a KDE Plasma session
@@ -95,9 +91,5 @@ desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_lightandprese
 %{_datadir}/icons/hicolor/scalable/apps/io.github.onuralpszr.lightandpresence-off-symbolic.svg
 
 %changelog
-* Wed Oct 07 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org> - 0.1.0-2
-- Name the icons after the app id, so KDE no longer shows the Plasma logo
-  in their place, and ship the widget icons inside the widget package
-
-* Wed Oct 07 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org> - 0.1.0-1
+* Wed Oct 07 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org> - 0.1.1-1
 - Initial package
