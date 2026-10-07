@@ -13,7 +13,7 @@
   <a href="https://kde.org/plasma-desktop/"><img alt="KDE Plasma 6" src="https://img.shields.io/badge/KDE%20Plasma-6-1D99F3?logo=kde&amp;logoColor=white"></a>
   <a href="https://fedoraproject.org"><img alt="Fedora 45" src="https://img.shields.io/badge/Fedora-45-51A2DA?logo=fedora&amp;logoColor=white"></a>
   <a href="https://github.com/onuralpszr/plasma-sensord/actions/workflows/check.yml"><img alt="Check" src="https://github.com/onuralpszr/plasma-sensord/actions/workflows/check.yml/badge.svg"></a>
-  <a href="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/xps-fedora/package/plasma-sensord/"><img alt="COPR build" src="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/xps-fedora/package/plasma-sensord/status_image/last_build.png"></a>
+  <a href="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/plasma-sensord/package/plasma-sensord/"><img alt="COPR build" src="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/plasma-sensord/package/plasma-sensord/status_image/last_build.png"></a>
 </p>
 
 plasma-sensord adjusts the screen brightness of a KDE Plasma 6 session from the ambient light sensor. When the computer has a usable human presence sensor, it can also dim the screen when you leave, lock the session when you stay away, and wake the screen to the lock screen when you return.
@@ -41,6 +41,18 @@ The project has three parts:
 | System Settings page                                                                              | Plasma widget                                                                       |
 | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | <img src="docs/screenshots/settings-page.png" alt="Light and Presence settings page" width="420"> | <img src="docs/screenshots/widget.png" alt="Light and Presence widget" width="420"> |
+
+## Installing
+
+On Fedora, plasma-sensord is available from COPR:
+
+```bash
+sudo dnf copr enable thunderbirdtr/plasma-sensord
+sudo dnf install plasma-sensord
+systemctl --user enable --now plasma-sensord
+```
+
+Then open System Settings, Display and Monitor, Light & Presence, or add the Light & Presence widget to a panel.
 
 ## Requirements
 
