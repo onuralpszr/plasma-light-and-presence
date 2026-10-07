@@ -18,9 +18,10 @@ PlasmoidItem {
 
     readonly property string service: "io.github.onuralpszr.LightAndPresence"
     readonly property string objectPath: "/io/github/onuralpszr/LightAndPresence"
-    readonly property string iconOn: "plasma-light-and-presence-symbolic"
-    readonly property string iconOff: "plasma-light-and-presence-off-symbolic"
-    readonly property string iconColor: "plasma-light-and-presence"
+    // Shipped inside the widget package, so they do not depend on the icon theme
+    readonly property url iconOn: Qt.resolvedUrl("../icons/io.github.onuralpszr.lightandpresence-symbolic.svg")
+    readonly property url iconOff: Qt.resolvedUrl("../icons/io.github.onuralpszr.lightandpresence-off-symbolic.svg")
+    readonly property url iconColor: Qt.resolvedUrl("../icons/io.github.onuralpszr.lightandpresence.svg")
 
     // --- service state ---------------------------------------------------
     // The watcher only reports registration events; a service that was
