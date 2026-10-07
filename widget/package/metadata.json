@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "thunderbirdtr@fedoraproject.org",
+                "Name": "Onuralp SEZER"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Automatic brightness from the ambient light sensor and presence sensing",
+        "Icon": "plasma-sensord",
+        "Id": "org.plasmasensord.widget",
+        "License": "Apache-2.0",
+        "Name": "Light & Presence",
+        "Version": "0.1.0"
+    },
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "Hardware"
+}
