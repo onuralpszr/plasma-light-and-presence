@@ -12,8 +12,6 @@ def state_home():
 
 
 STATE_FILE = os.path.join(state_home(), "plasma-light-and-presence", "state")
-# Written by the earlier xps-ptl-autobrightness prototype.
-LEGACY_FILE = os.path.join(state_home(), "xps-ptl", "autobrightness")
 
 
 def _read_offset(path):
@@ -22,10 +20,6 @@ def _read_offset(path):
             text = f.read()
     except OSError:
         return None
-    try:  # the first prototype stored only the number
-        return float(text.strip())
-    except ValueError:
-        pass
     cp = configparser.ConfigParser()
     try:
         cp.read_string(text)
@@ -36,14 +30,7 @@ def _read_offset(path):
 
 def load_offset():
     offset = _read_offset(STATE_FILE)
-    if offset is not None:
-        return offset
-    offset = _read_offset(LEGACY_FILE)
-    if offset is not None:
-        log.info(f"migrated learned offset {offset:+.1f}% from {LEGACY_FILE}")
-        save_offset(offset)
-        return offset
-    return 0.0
+    return offset if offset is not None else 0.0
 
 
 def save_offset(offset):
