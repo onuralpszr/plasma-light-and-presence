@@ -1,6 +1,6 @@
 Name:           plasma-light-and-presence
 Version:        0.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Ambient light brightness and presence sensing for KDE Plasma
 
 License:        Apache-2.0
@@ -85,10 +85,14 @@ desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_lightandprese
 %{_kf6_datadir}/applications/kcm_lightandpresence.desktop
 %{_kf6_datadir}/config.kcfg/lightandpresencesettings.kcfg
 %{_kf6_datadir}/plasma/plasmoids/io.github.onuralpszr.lightandpresence/
-%{_datadir}/icons/hicolor/scalable/apps/plasma-light-and-presence.svg
-%{_datadir}/icons/hicolor/scalable/apps/plasma-light-and-presence-symbolic.svg
-%{_datadir}/icons/hicolor/scalable/apps/plasma-light-and-presence-off-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/apps/io.github.onuralpszr.lightandpresence.svg
+%{_datadir}/icons/hicolor/scalable/apps/io.github.onuralpszr.lightandpresence-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/apps/io.github.onuralpszr.lightandpresence-off-symbolic.svg
 
 %changelog
+* Wed Oct 07 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org> - 0.1.0-2
+- Name the icons after the app id, so KDE no longer shows the Plasma logo
+  in their place, and ship the widget icons inside the widget package
+
 * Wed Oct 07 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org> - 0.1.0-1
 - Initial package
