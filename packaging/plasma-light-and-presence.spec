@@ -1,3 +1,8 @@
+# Keep the file times from the source tarball (the commit time). Clamping them
+# to the changelog date gives two releases made on the same day identical
+# QML timestamps, and Plasma then keeps running the cached older widget.
+%global clamp_mtime_to_source_date_epoch 0
+
 Name:           plasma-light-and-presence
 Version:        0.1.0
 Release:        2%{?dist}
