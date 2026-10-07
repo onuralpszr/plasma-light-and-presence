@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org>
 
 install(FILES
-    icons/plasma-light-and-presence.svg
-    icons/plasma-light-and-presence-symbolic.svg
-    icons/plasma-light-and-presence-off-symbolic.svg
+    icons/io.github.onuralpszr.lightandpresence.svg
+    icons/io.github.onuralpszr.lightandpresence-symbolic.svg
+    icons/io.github.onuralpszr.lightandpresence-off-symbolic.svg
     DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps)
