@@ -1,13 +1,13 @@
 [Unit]
 Description=Light & Presence (ambient light brightness and presence sensing)
-Documentation=file://@CMAKE_INSTALL_FULL_DATAROOTDIR@/doc/plasma-sensord/README.md
+Documentation=file://@CMAKE_INSTALL_FULL_DATAROOTDIR@/doc/plasma-light-and-presence/README.md
 PartOf=graphical-session.target
 After=graphical-session.target plasma-powerdevil.service
 
 [Service]
 Type=dbus
-BusName=org.plasmasensord.Daemon
-ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/plasma-sensord
+BusName=io.github.onuralpszr.LightAndPresence
+ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/plasma-light-and-presence
 Restart=on-failure
 RestartSec=5
 Slice=background.slice

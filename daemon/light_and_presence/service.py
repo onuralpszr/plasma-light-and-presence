@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org>
-"""org.plasmasensord.Daemon on the session bus.
+"""io.github.onuralpszr.LightAndPresence on the session bus.
 
 Used by the System Settings page and the Plasma widget. Live values are
 properties; every change is announced with PropertiesChanged.
@@ -10,8 +10,8 @@ import dbus.service
 
 from . import __version__
 
-SERVICE = "org.plasmasensord.Daemon"
-OBJECT_PATH = "/org/plasmasensord/Daemon"
+SERVICE = "io.github.onuralpszr.LightAndPresence"
+OBJECT_PATH = "/io/github/onuralpszr/LightAndPresence"
 IFACE = SERVICE
 
 # name -> (D-Bus signature, writable)
@@ -111,7 +111,7 @@ class Service(dbus.service.Object):
         marker = f'<interface name="{IFACE}">\n'
         return xml.replace(marker, marker + props, 1)
 
-    # --- org.plasmasensord.Daemon --------------------------------------------
+    # --- io.github.onuralpszr.LightAndPresence --------------------------------------------
     @dbus.service.method(IFACE, in_signature="b")
     def SetAutoBrightnessEnabled(self, on):
         self.daemon.set_auto_enabled(bool(on))

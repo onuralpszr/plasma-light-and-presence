@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org>
 import sys
 
-sys.path.insert(0, "@PLASMA_SENSORD_PYTHON_DIR@")
+sys.path.insert(0, "@LIGHT_AND_PRESENCE_PYTHON_DIR@")
 
-from plasma_sensord.main import main  # noqa: E402
+from light_and_presence.main import main  # noqa: E402
 
 main()

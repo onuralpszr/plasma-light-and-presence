@@ -11,7 +11,7 @@ def state_home():
     return os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state")
 
 
-STATE_FILE = os.path.join(state_home(), "plasma-sensord", "state")
+STATE_FILE = os.path.join(state_home(), "plasma-light-and-presence", "state")
 # Written by the earlier xps-ptl-autobrightness prototype.
 LEGACY_FILE = os.path.join(state_home(), "xps-ptl", "autobrightness")
 

@@ -117,7 +117,7 @@ class Daemon:
 
 def main():
     parser = argparse.ArgumentParser(
-        prog="plasma-sensord",
+        prog="plasma-light-and-presence",
         description="Adjust screen brightness from the ambient light sensor and "
                     "react to human presence.")
     parser.add_argument("--debug", action="store_true", help="log every decision")
@@ -125,7 +125,7 @@ def main():
                         help="read the sensors but never change the brightness")
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     args = parser.parse_args()
-    log.verbose = args.debug or os.environ.get("PLASMA_SENSORD_DEBUG") == "1"
+    log.verbose = args.debug or os.environ.get("LIGHT_AND_PRESENCE_DEBUG") == "1"
 
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     try:
@@ -148,6 +148,6 @@ def main():
 
     GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGTERM, stop)
     GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, stop)
-    log.info(f"plasma-sensord {__version__} started"
+    log.info(f"plasma-light-and-presence {__version__} started"
              + (" (dry run)" if args.dry_run else ""))
     loop.run()

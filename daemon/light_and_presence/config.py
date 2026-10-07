@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 Onuralp SEZER <thunderbirdtr@fedoraproject.org>
-"""Settings from plasma-sensordrc.
+"""Settings from plasma-light-and-presencerc.
 
 The file is written by the System Settings page through KConfigXT, so it uses
 the KConfig INI dialect. System-wide defaults may be placed in
-/etc/xdg/plasma-sensordrc; the per-user file in ~/.config overrides them.
+/etc/xdg/plasma-light-and-presencerc; the per-user file in ~/.config overrides them.
 """
 import math
 import os
 import re
 
-CONFIG_NAME = "plasma-sensordrc"
+CONFIG_NAME = "plasma-light-and-presencerc"
 
 # Smoothing weight per 2 s control step for each Responsiveness choice.
 RESPONSIVENESS_ALPHA = {"Slow": 0.15, "Normal": 0.3, "Fast": 0.5}
@@ -195,7 +195,7 @@ def write_entry(group, key, value):
             out.append(f"{key}={value}")
 
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    tmp = path + ".plasma-sensord.tmp"
+    tmp = path + ".plasma-light-and-presence.tmp"
     with open(tmp, "w", encoding="utf-8") as f:
         f.write("\n".join(out) + "\n")
     os.replace(tmp, path)
