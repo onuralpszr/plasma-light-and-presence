@@ -50,9 +50,11 @@ On Fedora, plasma-light-and-presence is available from COPR:
 sudo dnf copr enable thunderbirdtr/plasma-light-and-presence
 sudo dnf install plasma-light-and-presence
 systemctl --user enable --now plasma-light-and-presence
+kbuildsycoca6
+systemctl --user restart plasma-plasmashell
 ```
 
-Then open System Settings, Display and Monitor, Light & Presence, or add the Light & Presence widget to a panel.
+`kbuildsycoca6` refreshes the System Settings and search index, and restarting the Plasma shell loads the new widget without logging out. Then open System Settings, Display and Monitor, Light & Presence, or add the Light & Presence widget to a panel.
 
 ## Requirements
 
