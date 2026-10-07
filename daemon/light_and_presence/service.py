@@ -14,7 +14,7 @@ SERVICE = "io.github.onuralpszr.LightAndPresence"
 OBJECT_PATH = "/io/github/onuralpszr/LightAndPresence"
 IFACE = SERVICE
 
-# name -> (D-Bus signature, writable)
+# property name: (D-Bus signature, writable)
 PROPERTIES = {
     "Version": ("s", False),
     "AutoBrightnessEnabled": ("b", True),
