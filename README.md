@@ -28,13 +28,13 @@ The project has three parts:
 
 ✅ working, ⚠️ partly working, ❌ not working, ⛔ blocked by hardware support
 
-| Feature                                                | Status | Notes                                                |
-| ------------------------------------------------------ | ------ | ---------------------------------------------------- |
-| Automatic brightness from the light sensor             | ✅     | spike filter, smoothing and a learned preference     |
-| System Settings page                                   | ✅     | Light & Presence, under Display and Monitor          |
-| Plasma widget                                          | ✅     | panel or system tray                                 |
-| Presence: dim, lock and wake                           | ⚠️     | ready, turns on only with a usable sensor            |
-| Presence on camera based sensors (Dell XPS 16 DA16260) | ⛔     | the sensor reports nothing unless the camera streams |
+| Feature                                    | Status | Notes                                                                                                                                   |
+| ------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Automatic brightness from the light sensor | ✅     | spike filter, smoothing and a learned preference                                                                                        |
+| System Settings page                       | ✅     | Light & Presence, under Display and Monitor                                                                                             |
+| Plasma widget                              | ✅     | panel or system tray                                                                                                                    |
+| Presence: dim, lock and wake               | ⚠️     | ready, turns on only with a usable sensor                                                                                               |
+| Presence on camera based sensors           | ⛔     | some laptops route presence detection through the camera; those sensors report nothing unless the camera streams, so presence stays off |
 
 ## Screenshots
 
@@ -94,7 +94,7 @@ For troubleshooting, the service can run in the foreground with `--debug`, and w
 - When you change the brightness yourself and leave it for ten seconds, the difference is kept as your preference and applied on top of the curve from then on. The widget's slider sets the same preference.
 - When the brightness drops to half or less at once (Plasma dimming an idle screen), adjustment pauses until the brightness comes back. Nothing is learned from it.
 
-The learned preference is kept in `~/.local/state/plasma-sensord/state`. A preference learned by the earlier xps-ptl-autobrightness prototype is imported on first start.
+The learned preference is kept in `~/.local/state/plasma-sensord/state`. A preference saved by the earlier auto brightness prototype is imported on first start.
 
 ## Presence
 
@@ -158,7 +158,7 @@ plasma-sensord is built on these projects. Thank you to everyone behind them.
 - [iio-sensor-proxy](https://gitlab.freedesktop.org/hadess/iio-sensor-proxy), for the ambient light and proximity sensors.
 - The Linux [HID sensor hub and IIO](https://docs.kernel.org/hid/hid-sensor.html) drivers, which expose the human presence sensor.
 - [dbus-python](https://gitlab.freedesktop.org/dbus/dbus-python) and [systemd-logind](https://www.freedesktop.org/software/systemd/man/latest/systemd-logind.service.html), for the session bus and screen locking.
-- [xps-fedora](https://github.com/onuralpszr/xps-fedora), where this started as the XPS auto brightness service.
+- [xps-fedora](https://github.com/onuralpszr/xps-fedora), where this started as an auto brightness prototype.
 
 ## License
 
