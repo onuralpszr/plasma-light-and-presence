@@ -1,4 +1,20 @@
-# plasma-sensord
+<p align="center">
+  <img src="data/icons/plasma-sensord.svg" alt="plasma-sensord icon" width="128">
+</p>
+
+<h1 align="center">plasma-sensord</h1>
+
+<p align="center">
+  Ambient light brightness and presence awareness for KDE Plasma 6.
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg"></a>
+  <a href="https://kde.org/plasma-desktop/"><img alt="KDE Plasma 6" src="https://img.shields.io/badge/KDE%20Plasma-6-1D99F3?logo=kde&amp;logoColor=white"></a>
+  <a href="https://fedoraproject.org"><img alt="Fedora 45" src="https://img.shields.io/badge/Fedora-45-51A2DA?logo=fedora&amp;logoColor=white"></a>
+  <a href="https://github.com/onuralpszr/plasma-sensord/actions/workflows/check.yml"><img alt="Check" src="https://github.com/onuralpszr/plasma-sensord/actions/workflows/check.yml/badge.svg"></a>
+  <a href="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/xps-fedora/package/plasma-sensord/"><img alt="COPR build" src="https://copr.fedorainfracloud.org/coprs/thunderbirdtr/xps-fedora/package/plasma-sensord/status_image/last_build.png"></a>
+</p>
 
 plasma-sensord adjusts the screen brightness of a KDE Plasma 6 session from the
 ambient light sensor. When the computer has a usable human presence sensor, it
@@ -169,11 +185,14 @@ For example:
 
 ## Credits
 
-- [KDE Frameworks](https://develop.kde.org/products/frameworks/) and
-  [KDE Plasma](https://kde.org/plasma-desktop/), for KConfig, KCMUtils,
-  Kirigami, the Plasma widget framework and PowerDevil's brightness interface.
-- [iio-sensor-proxy](https://gitlab.freedesktop.org/hadess/iio-sensor-proxy),
-  for access to the ambient light and proximity sensors.
+plasma-sensord is built on these projects. Thank you to everyone behind them.
+
+* [KDE Frameworks](https://develop.kde.org/products/frameworks/): [KConfig](https://invent.kde.org/frameworks/kconfig), [KCMUtils](https://invent.kde.org/frameworks/kcmutils), [Kirigami](https://invent.kde.org/frameworks/kirigami) and [KI18n](https://invent.kde.org/frameworks/ki18n).
+* [KDE Plasma](https://kde.org/plasma-desktop/): [libplasma](https://invent.kde.org/plasma/libplasma) for the widget and [PowerDevil](https://invent.kde.org/plasma/powerdevil) for the screen brightness interface.
+* [iio-sensor-proxy](https://gitlab.freedesktop.org/hadess/iio-sensor-proxy), for the ambient light and proximity sensors.
+* The Linux [HID sensor hub and IIO](https://docs.kernel.org/hid/hid-sensor.html) drivers, which expose the human presence sensor.
+* [dbus-python](https://gitlab.freedesktop.org/dbus/dbus-python) and [systemd-logind](https://www.freedesktop.org/software/systemd/man/latest/systemd-logind.service.html), for the session bus and screen locking.
+* [xps-fedora](https://github.com/onuralpszr/xps-fedora), where this started as the XPS auto brightness service.
 
 ## License
 
