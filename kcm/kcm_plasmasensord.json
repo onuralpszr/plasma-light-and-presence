@@ -1,0 +1,17 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "thunderbirdtr@fedoraproject.org",
+                "Name": "Onuralp SEZER"
+            }
+        ],
+        "Description": "Screen brightness from the ambient light sensor and presence sensing",
+        "Icon": "plasma-sensord",
+        "License": "Apache-2.0",
+        "Name": "Light & Presence"
+    },
+    "X-KDE-Keywords": "brightness,ambient light,light sensor,automatic brightness,auto brightness,lux,presence,human presence,proximity,away,dim,lock,wake",
+    "X-KDE-System-Settings-Parent-Category": "display",
+    "X-KDE-Weight": 60
+}
